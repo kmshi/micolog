@@ -42,7 +42,7 @@ def requires_admin(method):
 	@wraps(method)
 	def wrapper(self, *args, **kwargs):
 		if not self.is_login:
-			self.redirect(users.create_login_url(self.request.uri))
+			self.redirect(users.create_login_url(replaceappspotdomain(self.request.uri)))
 			return
 		elif not (self.is_admin
 			or self.author):
@@ -225,7 +225,13 @@ class Pager(object):
 
 		return (results, links)
 
-
+def replaceappspotdomain(uri):
+        from model import g_blog
+        from urlparse import urlparse,urlunparse
+        (schema, netloc, path, params, query, fragment) = urlparse(uri)
+        netloc = g_blog.domain
+        return urlunparse((schema, netloc, path, params, query, fragment))
+        
 class BaseRequestHandler(webapp.RequestHandler):
 	def __init__(self):
 		self.current='home'
@@ -240,8 +246,8 @@ class BaseRequestHandler(webapp.RequestHandler):
 		self.blog = g_blog
 		self.login_user = users.get_current_user()
 		self.is_login = (self.login_user != None)
-		self.loginurl=users.create_login_url(self.request.uri)
-		self.logouturl=users.create_logout_url(self.request.uri)
+		self.loginurl=users.create_login_url(replaceappspotdomain(self.request.uri))
+		self.logouturl=users.create_logout_url(replaceappspotdomain(self.request.uri))
 		self.is_admin = users.is_current_user_admin()
 
 		if self.is_admin:
