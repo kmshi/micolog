@@ -45,22 +45,22 @@ myBoxObject.applyCornersToAll();
 <div id="menu">
 <ul>
 		<li class="{%if ishome%}current_page_item{%else%}page_item{%endif%}" >
-			<a  href="{{ blog.baseurl }}"  >Home</a>
+			<a  href="{{ blog.baseurl }}"  >ホーム</a>
 		</li>
 		{{self.m_list_pages}}
     <li class="page_item" ><a href="{{blog.feedurl}}">(RSS)</a></li>
     {% block topmenu %}{% endblock %}
 
     {%if self.is_admin or self.author%}
-     <li><a href="/admin">Admin</a> </li>
+     <li><a href="/admin">管理画面</a> </li>
     {%endif%}
       <li>
      {%if self.is_login%}
 
-       <a href="{{self.logouturl}}">Logout</a>
+       <a href="{{self.logouturl}}">ログアウト</a>
 
      {%else%}
-       <a href="/admin">Login</a>
+       <a href="/admin">ログイン</a>
 
      {%endif%}
          </li>
@@ -69,7 +69,7 @@ myBoxObject.applyCornersToAll();
 <li id="searchbox">
 
 <form method="get" id="searchform" action="http://www.google.com/search">
-		<input type="text" value="Search..." onfocus="if (this.value == 'Search...') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Search...';}" name="as_q" id="s" />
+		<input type="text" value="キーワード入力..." onfocus="if (this.value == 'Search...') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Search...';}" name="as_q" id="s" />
 		<input type="image" src="/themes/{{ blog.theme_name }}/images/transparent.gif" id="go" alt="Search" title="Search" />
 		<input name="as_sitesearch" value="{{blog.domain}}" type="hidden">
 
@@ -96,7 +96,7 @@ myBoxObject.applyCornersToAll();
 <div id="footer">
 {%mf footer%}
 	<div class="footer">
-			<p class="fooleft">{{blog.title}} is proudly powered by <a href="http://xuming.net">Micolog</a>. Theme by <a href="http://bob.my/" title="Simple">Bob</a>
+			<p class="fooleft">{{blog.title}} is proudly powered by <a href="http://xuming.net">Micolog</a>. Theme by <a href="http://bob.my/" title="Simple">Bob</a> translated by <a href="http://d.hatena.ne.jp/kengoou" title="Simple">KENGOOU</a>
 		</p>
 		<p class="fooright"><a href="#top" title="Top">top</a></p>
 	</div>
