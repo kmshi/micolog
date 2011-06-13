@@ -15,9 +15,22 @@
   <div id="content">
     <div id="post-{{entry.key}}" class="post">
       <h2 class="post-title"><a href="/{{ entry.link|escape }}" title="{{ entry.title|escape }} ">{{ entry.title|escape }}</a></h2>
-      <div class="post-meta">{{ entry.date|datetz:"F jS, Y, H:i" }} {{entry.author}} / <a href="/{{entry.link|escape}}">{{entry.readtimes}} 次阅读</a> / <a href="/{{entry.link|escape}}#comments" title="查看 {{ entry.title}} 下的全部评论">{{entry.commentcount}} 条评论</a>{%if self.is_admin%} / <a href="{{entry.edit_url}}"  title="编辑文章" target="_blank">编辑</a>{%endif%} </div>
-      <div class="entry"> {{ entry.content }} </div>
-      <div class="post-info">分类：{%for cate in entry.categories%}&nbsp;<a href="/category/{{cate.slug}}" title="查看 {{cate.name}} 下的全部文章">{{cate.name}}</a>&nbsp;&nbsp;{%endfor%}标签：{% if entry.tags%}{%for tag in entry.tags%}&nbsp;<a href="/tag/{{tag|urlencode}}" title="查看 {{tag}} 标签的全部文章">{{tag}}</a>&nbsp;{%endfor%}{%endif%} </div>
+      <div class="post-meta">
+      {{ entry.date|datetz:"F jS, Y, H:i" }} {{entry.author}} / <a href="/{{entry.link|escape}}">{{entry.readtimes}} 次阅读</a> / <a href="/{{entry.link|escape}}#comments" title="查看 {{ entry.title}} 下的全部评论">{{entry.commentcount}} 条评论</a>{%if self.is_admin%} / <a href="{{entry.edit_url}}"  title="编辑文章" target="_blank">编辑</a>{%endif%}
+      <br />分类：{%for cate in entry.categories%}&nbsp;<a href="/category/{{cate.slug}}" title="查看 {{cate.name}} 下的全部文章">{{cate.name}}</a>&nbsp;&nbsp;{%endfor%}标签：{% if entry.tags%}{%for tag in entry.tags%}&nbsp;<a href="/tag/{{tag|urlencode}}" title="查看 {{tag}} 标签的全部文章">{{tag}}</a>&nbsp;{%endfor%}{%endif%}
+      </div>
+      <div class="entry"> {{ entry.content }} </div>      
+      <div class="post-info">
+      {%if entry.miro_subscription_url%}
+      <a href="{{ entry.miro_subscription_url }}" title="订阅到Miro-CrowdWisdom播放器" target="_blank"><img src="/themes/{{ blog.theme_name }}/images/patrace1.png" alt="Miro Video Player" border="0" /></a>
+      &nbsp;&nbsp;&nbsp;
+      {%endif%}
+      {%if entry.sourcefeed%}
+      <a href="{{ entry.sourcefeed }}" title="订阅RSS" target="_blank"><img src="/themes/{{ blog.theme_name }}/images/ico_rss.png" alt="RSS Subscribe" border="0" /></a>
+      &nbsp;&nbsp;&nbsp;
+      {%endif%}
+      <script>weibo("{{ entry.fullurl|escape }}","{{ entry.title|escape }}")</script>
+      </div>
     </div>
     <div class="pagenavi"> {%for prev in entry.prev%} <span class="previous-page">&laquo;&nbsp;<a href="/{{prev.link}}">{{prev.title}}</a></span> {%endfor%}
       {%for next in entry.next%} <span class="next-page"><a href="/{{next.link}}">{{next.title}}</a>&nbsp;&raquo;</span> {%endfor%} </div>

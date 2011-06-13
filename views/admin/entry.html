@@ -1,4 +1,4 @@
-{% load i18n %}
+﻿{% load i18n %}
 {% extends "base.html" %}
 {% block header %}
 <style type='text/css' media='all'>
@@ -311,6 +311,10 @@
 <h3>{% trans "Excerpt" %}</h3>
 <div class="inside">
 	<textarea name="excerpt" style="width:98%"/>{%if entry.excerpt%}{{entry.excerpt|escape}}{%endif%}</textarea><br/>
+</div>
+<h3>{% trans "Source feed url" %}</h3>
+<div class="inside">
+	<input type="text" value="{{entry.sourcefeed|escape}}" size="100" name="sourcefeed"/><br/>
 </div>
 </div>
 

@@ -1,4 +1,4 @@
-﻿# -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 import os,logging
 from google.appengine.api import users
 from google.appengine.ext import db
@@ -424,6 +424,22 @@ class Entry(BaseModel):
 
 	#keep in top
 	sticky=db.BooleanProperty(default=False)
+
+	#associated podcast/videocast/blogcast
+	sourcefeed=db.StringProperty(multiline=False,default='')
+	#thumbimage=db.BlobProperty()
+	#enclosures=db.TextProperty(default='')
+
+	@property
+	def miro_subscription_url(self):
+                miro_base_url = 'http://subscribe.getmiro.com/?'
+                if 'videocast' in [cat.name for cat in self.categories] and self.sourcefeed:
+                        params={'type':'video','url1':self.sourcefeed}
+                        return miro_base_url + urllib.urlencode(params)
+                if 'audiocast' in [cat.name for cat in self.categories] and self.sourcefeed:
+                        params={'type':'audio','url1':self.sourcefeed}
+                        return miro_base_url + urllib.urlencode(params)
+                return None
 
 
 	postname=''
