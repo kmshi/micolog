@@ -23,12 +23,13 @@
       <br />分类：{%for cate in entry.categories%}&nbsp;<a href="/category/{{cate.slug}}" title="查看 {{cate.name}} 下的全部文章">{{cate.name}}</a>&nbsp;&nbsp;{%endfor%}标签：{% if entry.tags%}{%for tag in entry.tags%}&nbsp;<a href="/tag/{{tag|urlencode}}" title="查看 {{tag}} 标签的全部文章">{{tag}}</a>&nbsp;{%endfor%}{%endif%}
       </div>
       <div class="entry"> {{ entry.content }} </div>
-      
+      <div id="play"><h4>播放列表只包含最新的5个片断（下载可获取全部）：</h4><br/></div>
       <div id="mediacontainer">Loading the player ...</div>
       <script type="text/javascript">
         jwplayer("mediacontainer").setup({
             flashplayer: "/static/jwplayer/player.swf",
             playlistfile: '{{ entry.sourcefeed|escape }}/5',
+            /**playlistfile:'http://etvblog.co.cc/y/playlist/rss/id/5273770/5',**/
             playlist: 'right',
             /**file:'http://etvblog.co.cc/yd/vid/XMjMzNTA0MzI0',**/
             controlbar: 'bottom',
@@ -48,8 +49,10 @@
           <div class="share-item">          
            {%if entry.sourcefeed%}
             {%if entry.miro_subscription_url %}
+            <!--
              <span class="share-tip">播放:&nbsp;</span>
-             <a href="{{ entry.link|escape }}" title="在线播放"><img src="/themes/{{ blog.theme_name }}/images/play.png" alt="Play" border="0" /></a>
+             <a href="{{ entry.link|escape }}#play" title="在线播放"><img src="/themes/{{ blog.theme_name }}/images/play.png" alt="Play" border="0" /></a>
+            --> 
             {%else%}
              <span class="share-tip">订阅:&nbsp;</span>
              <a href="{{ entry.sourcefeed }}" title="订阅RSS" target="_blank"><img src="/themes/{{ blog.theme_name }}/images/ico_rss.png" alt="RSS Subscribe" border="0" /></a>

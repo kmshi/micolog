@@ -35,7 +35,7 @@
            {%if entry.sourcefeed%}
             {%if entry.miro_subscription_url %}
              <span class="share-tip">播放:&nbsp;</span>
-             <a href="{{ entry.link|escape }}" title="在线播放"><img src="/themes/{{ blog.theme_name }}/images/play.png" alt="Play" border="0" /></a>
+             <a href="{{ entry.link|escape }}#play" title="在线播放"><img src="/themes/{{ blog.theme_name }}/images/play.png" alt="Play" border="0" /></a>
             {%else%}
              <span class="share-tip">订阅:&nbsp;</span>
              <a href="{{ entry.sourcefeed }}" title="订阅RSS" target="_blank"><img src="/themes/{{ blog.theme_name }}/images/ico_rss.png" alt="RSS Subscribe" border="0" /></a>
