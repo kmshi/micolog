@@ -441,6 +441,16 @@ class Entry(BaseModel):
                         return miro_base_url + urllib.urlencode(params)
                 return None
 
+	@property
+	def get_sourcefeed_type(self):
+                if 'videocast' in [cat.name for cat in self.categories] and self.sourcefeed:
+                        return 'video'
+                if 'audiocast' in [cat.name for cat in self.categories] and self.sourcefeed:
+                        return 'sound'
+                if 'blogcast' in [cat.name for cat in self.categories] and self.sourcefeed:
+                        return 'blog'
+                return None
+        
 
 	postname=''
 	_relatepost=None

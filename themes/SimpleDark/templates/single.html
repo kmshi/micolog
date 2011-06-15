@@ -16,34 +16,67 @@
     <div id="post-{{entry.key}}" class="post">
       <h2 class="post-title"><a href="/{{ entry.link|escape }}" title="{{ entry.title|escape }} ">{{ entry.title|escape }}</a></h2>
       <div class="post-meta">
-      {{ entry.date|datetz:"F jS, Y, H:i" }} {{entry.author}} / <a href="/{{entry.link|escape}}">{{entry.readtimes}} 次阅读</a> / <a href="/{{entry.link|escape}}#comments" title="查看 {{ entry.title}} 下的全部评论">{{entry.commentcount}} 条评论</a>{%if self.is_admin%} / <a href="{{entry.edit_url}}"  title="编辑文章" target="_blank">编辑</a>{%endif%}
+      {%if entry.get_sourcefeed_type%}
+      <img src="/themes/{{ blog.theme_name }}/images/{{ entry.get_sourcefeed_type }}.png" border="0" />
+      {%endif%}
+      {{ entry.date|datetz:"F jS, Y, H:i" }} &nbsp;/&nbsp; <a href="/{{entry.link|escape}}">{{entry.readtimes}} 次阅读</a> / <a href="/{{entry.link|escape}}#comments" title="查看 {{ entry.title}} 下的全部评论">{{entry.commentcount}} 条评论</a>{%if self.is_admin%} / <a href="{{entry.edit_url}}"  title="编辑文章" target="_blank">编辑</a>{%endif%}
       <br />分类：{%for cate in entry.categories%}&nbsp;<a href="/category/{{cate.slug}}" title="查看 {{cate.name}} 下的全部文章">{{cate.name}}</a>&nbsp;&nbsp;{%endfor%}标签：{% if entry.tags%}{%for tag in entry.tags%}&nbsp;<a href="/tag/{{tag|urlencode}}" title="查看 {{tag}} 标签的全部文章">{{tag}}</a>&nbsp;{%endfor%}{%endif%}
       </div>
-      <div class="entry"> {{ entry.content }} </div>      
-      <div class="post-info">
-      {%if entry.miro_subscription_url%}
-      <a href="{{ entry.miro_subscription_url }}" title="订阅到Miro-CrowdWisdom播放器" target="_blank"><img src="/themes/{{ blog.theme_name }}/images/patrace1.png" alt="Miro Video Player" border="0" /></a>
-      &nbsp;&nbsp;&nbsp;
-      {%endif%}
-      {%if entry.sourcefeed%}
-      <a href="{{ entry.sourcefeed }}" title="订阅RSS" target="_blank"><img src="/themes/{{ blog.theme_name }}/images/ico_rss.png" alt="RSS Subscribe" border="0" /></a>
-      &nbsp;&nbsp;&nbsp;
-      {%endif%}
-      <script>weibo("{{ entry.fullurl|escape }}","{{ entry.title|escape }}")</script>
+      <div class="entry"> {{ entry.content }} </div>
+      
+      <div id="mediacontainer">Loading the player ...</div>
+      <script type="text/javascript">
+        jwplayer("mediacontainer").setup({
+            flashplayer: "/static/jwplayer/player.swf",
+            playlistfile: '{{ entry.sourcefeed|escape }}/5',
+            playlist: 'right',
+            /**file:'http://etvblog.co.cc/yd/vid/XMjMzNTA0MzI0',**/
+            controlbar: 'bottom',
+            provider:'{{ entry.get_sourcefeed_type }}', /**video,sound,image,youtube,http,rtmp**/
+            height: 300,
+            width: 620 });
+      </script>
+    
+      <div class="post-info share">
+          {%if entry.miro_subscription_url %}
+            <div class="share-item-title">
+              <span class="share-tip">下载:&nbsp;</span> 
+              <a href="{{ entry.miro_subscription_url }}" title="用Miro-CrowdWisdom下载播放" target="_blank"><img src="/themes/{{ blog.theme_name }}/images/patrace1.png" alt="Download" border="0" /></a>
+            </div>
+          {%endif%}
+          
+          <div class="share-item">          
+           {%if entry.sourcefeed%}
+            {%if entry.miro_subscription_url %}
+             <span class="share-tip">播放:&nbsp;</span>
+             <a href="{{ entry.link|escape }}" title="在线播放"><img src="/themes/{{ blog.theme_name }}/images/play.png" alt="Play" border="0" /></a>
+            {%else%}
+             <span class="share-tip">订阅:&nbsp;</span>
+             <a href="{{ entry.sourcefeed }}" title="订阅RSS" target="_blank"><img src="/themes/{{ blog.theme_name }}/images/ico_rss.png" alt="RSS Subscribe" border="0" /></a>
+            {%endif%}
+           {%endif%}
+           <span class="share-tip">分享:&nbsp;&nbsp;</span>          
+           <script>weibo("{{ entry.fullurl|escape }}","{{ entry.title|escape }}")</script>
+          </div>
       </div>
     </div>
+    <!-- Related Posts-->    
+    {% if relateposts %}
+	<h2><strong>crowdwisdom 猜你还喜欢</strong></h2>
+	<ul class="relatedPosts">
+	{%for post in relateposts%}
+		<li><a href="/{{post.link|escape}}">{{post.title|escape}}</a></li>
+	{%endfor%}
+	</ul>
+    {% endif %}
+    <!-- end Related Posts-->
+    
     <div class="pagenavi"> {%for prev in entry.prev%} <span class="previous-page">&laquo;&nbsp;<a href="/{{prev.link}}">{{prev.title}}</a></span> {%endfor%}
-      {%for next in entry.next%} <span class="next-page"><a href="/{{next.link}}">{{next.title}}</a>&nbsp;&raquo;</span> {%endfor%} </div>
-    <div class="wumii-hook">
-    <input type="hidden" name="wurl" value="{{blog.baseurl}}/{{ entry.link }}" />
-    <input type="hidden" name="wtitle" value="{{entry.title}}" />
-</div>
-<p style="display: none;">
-    {%for tag in entry.tags%}<a rel="tag">{{tag}}</a>{%endfor%}
-</p>
-<script>
-    var wumiiSitePrefix = "{{blog.baseurl}}";
-</script>
-    {% include "comments.html" %} </div>
-  {% include "sidebar.html" %} </div>
+      {%for next in entry.next%} <span class="next-page"><a href="/{{next.link}}">{{next.title}}</a>&nbsp;&raquo;</span> {%endfor%}
+    </div>
+
+    {% include "comments.html" %}
+    </div>
+  {% include "sidebar.html" %}
+  </div>
 {% endblock %}
