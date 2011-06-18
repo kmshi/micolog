@@ -432,22 +432,22 @@ class Entry(BaseModel):
 
 	@property
 	def miro_subscription_url(self):
-                miro_base_url = 'http://subscribe.getmiro.com/?'
-                if 'videocast' in [cat.name for cat in self.categories] and self.sourcefeed:
+                miro_base_url = 'http://etvblog.co.cc/p/get?'
+                if 'videocast' in [cat.slug for cat in self.categories] and self.sourcefeed:
                         params={'type':'video','url1':self.sourcefeed}
                         return miro_base_url + urllib.urlencode(params)
-                if 'audiocast' in [cat.name for cat in self.categories] and self.sourcefeed:
+                if 'audiocast' in [cat.slug for cat in self.categories] and self.sourcefeed:
                         params={'type':'audio','url1':self.sourcefeed}
                         return miro_base_url + urllib.urlencode(params)
                 return None
 
 	@property
 	def get_sourcefeed_type(self):
-                if 'videocast' in [cat.name for cat in self.categories] and self.sourcefeed:
+                if 'videocast' in [cat.slug for cat in self.categories] and self.sourcefeed:
                         return 'video'
-                if 'audiocast' in [cat.name for cat in self.categories] and self.sourcefeed:
+                if 'audiocast' in [cat.slug for cat in self.categories] and self.sourcefeed:
                         return 'sound'
-                if 'blogcast' in [cat.name for cat in self.categories] and self.sourcefeed:
+                if 'blogcast'  in [cat.slug for cat in self.categories] and self.sourcefeed:
                         return 'blog'
                 return None
         
