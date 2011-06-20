@@ -23,7 +23,8 @@
       <br />分类：{%for cate in entry.categories%}&nbsp;<a href="/category/{{cate.slug}}" title="查看 {{cate.name}} 下的全部文章">{{cate.name}}</a>&nbsp;&nbsp;{%endfor%}标签：{% if entry.tags%}{%for tag in entry.tags%}&nbsp;<a href="/tag/{{tag|urlencode}}" title="查看 {{tag}} 标签的全部文章">{{tag}}</a>&nbsp;{%endfor%}{%endif%}
       </div>
       <div class="entry"> {{ entry.content }} </div>
-      <div id="play"><h4>播放列表只包含最新的5个片断（下载可获取全部）：</h4><br/></div>
+      {%if entry.miro_subscription_url %}
+      <div id="play"><h4>播放列表只包含最新的5个节目（下载可获取全部）：</h4><br/></div>
       <div id="mediacontainer">Loading the player ...</div>
       <script type="text/javascript">
         jwplayer("mediacontainer").setup({
@@ -38,6 +39,7 @@
             height: 300,
             width: 620 });
       </script>
+      {%endif%}
     
       <div class="post-info share">
           {%if entry.miro_subscription_url %}

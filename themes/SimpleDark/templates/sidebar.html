@@ -65,6 +65,14 @@
     </ul>
   </div>
 
+  <div id="tag_cloud" class="widget widget_tag_cloud">
+    <h4>标签云</h4>
+    <div class="tagcloud"> {% if alltags %}
+      {% for t in alltags %} <a style="font-size:{{ t.tagcount|add:12 }}px;" title="{{ t.tagcount }}篇文章" 
+						href="/tag/{{t.tag|urlencode}}">{{t.tag}}</a> {%endfor%}
+      {% endif %} </div>
+  </div>
+  
   <div id="recent-comments" class="widget">
     <h4>同学们，积极点评啊</h4>
     <ul id="recentcomments">
@@ -76,14 +84,6 @@
       </li>
       {%endfor%}
     </ul>
-  </div>
-
-  <div id="tag_cloud" class="widget widget_tag_cloud">
-    <h4>标签云</h4>
-    <div class="tagcloud"> {% if alltags %}
-      {% for t in alltags %} <a style="font-size:{{ t.tagcount|add:9 }}px;" title="{{ t.tagcount }}篇文章" 
-						href="/tag/{{t.tag|urlencode}}">{{t.tag}}</a> {%endfor%}
-      {% endif %} </div>
   </div>
 
   <div id="archives" class="widget">
@@ -106,7 +106,8 @@
 </div>
 <script type="text/javascript">
         $(".tagcloud a").each(function (i) {
-            this.style.color = randomColor()
+            /**this.style.color = randomColor()**/
+            this.style.color = "#080"
         });
         function randomColor() {
             var arrHex = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F"];
