@@ -34,6 +34,8 @@ from model import *
 ##settings._target = None
 ##activate(g_blog.language)
 from google.appengine.ext import zipserve
+from google.appengine.api import images
+import re
 
 
 def doRequestHandle(old_handler,new_handler,**args):
@@ -651,11 +653,20 @@ class getMedia(webapp.RequestHandler):
 			self.response.headers['Expires'] = 'Thu, 15 Apr 3010 20:00:00 GMT'
 			self.response.headers['Cache-Control'] = 'max-age=3600,public'
 			self.response.headers['Content-Type'] = str(media.mtype)
-			self.response.out.write(media.bits)
+			
 			a=self.request.get('a')
 			if a and a.lower()=='download':
 				media.download+=1
 				media.put()
+				
+			size=self.request.get('size')
+			m = re.match('(\d+)x(\d+)',size)
+			if size and m:
+                            width = int(m.group(1))
+                            height= int(m.group(2))
+                            self.response.out.write(images.resize(media.bits,width,height))
+                        else:
+                            self.response.out.write(media.bits)
 
 
 

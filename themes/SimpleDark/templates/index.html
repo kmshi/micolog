@@ -22,7 +22,12 @@
       {{ entry.date|datetz:"F jS, Y, H:i" }} &nbsp;/&nbsp; <a href="/{{entry.link|escape}}">{{entry.readtimes}} 次阅读</a> / <a href="/{{entry.link|escape}}#comments" title="查看 {{ entry.title}} 下的全部评论">{{entry.commentcount}} 条评论</a>{%if self.is_admin%} / <a class="post-edit-link" href="{{entry.edit_url}}"  title="编辑文章" target="_blank">编辑</a>{%endif%}
       <br/>分类：{%for cate in entry.categories%}&nbsp;<a href="/category/{{cate.slug}}" title="查看 {{cate.name}} 下的全部文章">{{cate.name}}</a>&nbsp;&nbsp;{%endfor%}标签：{% if entry.tags%}{%for tag in entry.tags%}&nbsp;<a href="/tag/{{tag|urlencode}}" title="查看 {{tag}} 标签的全部文章">{{tag}}</a>&nbsp;{%endfor%}{%endif%} 
       </div>
-      <div class="entry"> {{entry|excerpt_more:"<strong>&raquo;阅读全文</strong>"}} </div>
+      <div class="entry">
+          {%if entry.thumb_image_url %}
+              <img style="float: left; margin:10px 20px 0px 0px;" src="{{entry.thumb_image_url}}?size=128x96" alt="" />
+          {%endif%}
+          {{entry|excerpt_more:"<strong>&raquo;阅读全文</strong>"}}
+      </div>
       <div class="post-info share">
           {%if entry.miro_subscription_url %}
             <div class="share-item-title">
@@ -41,8 +46,6 @@
              <a href="{{ entry.sourcefeed }}" title="订阅RSS" target="_blank"><img src="/themes/{{ blog.theme_name }}/images/ico_rss.png" alt="RSS Subscribe" border="0" /></a>
             {%endif%}
            {%endif%}
-           <span class="share-tip">分享:&nbsp;&nbsp;</span>          
-           <script>weibo("{{ entry.fullurl|escape }}","{{ entry.title|escape }}")</script>
           </div>
       </div>
     </div>

@@ -441,6 +441,7 @@ class admin_entry(BaseRequestHandler):
 		menu_order=self.paramint('menu_order')
 		entry_excerpt=self.param('excerpt').replace('\n','<br />')
 		entry_sourcefeed=self.param('sourcefeed')
+		entry_thumb_image_url=self.param('thumb_image_url')
 		password=self.param('password')
 		sticky=self.parambool('sticky')
 
@@ -460,6 +461,7 @@ class admin_entry(BaseRequestHandler):
 						'entry_parent':entry_parent,
 						'excerpt':entry_excerpt,
                                         	'sourcefeed':entry_sourcefeed,
+                                        	'thumb_image_url':entry_thumb_image_url,
 						'menu_order':menu_order,
 						'is_external_page':is_external_page,
 						'target':target,
@@ -481,6 +483,7 @@ class admin_entry(BaseRequestHandler):
 				entry.menu_order=menu_order
 				entry.excerpt=entry_excerpt
 				entry.sourcefeed=entry_sourcefeed
+				entry.thumb_image_url=entry_thumb_image_url
 				entry.is_external_page=is_external_page
 				entry.target=target
 				entry.external_page_address=external_page_address
@@ -522,6 +525,7 @@ class admin_entry(BaseRequestHandler):
 					entry.menu_order=menu_order
 					entry.excerpt=entry_excerpt
 					entry.sourcefeed=entry_sourcefeed
+					entry.thumb_image_url=entry_thumb_image_url
 					entry.is_external_page=is_external_page
 					entry.target=target
 					entry.external_page_address=external_page_address

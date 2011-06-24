@@ -9,6 +9,7 @@
 <meta name="Description" content="{{entry.excerpt|escape}}">
 {%endif%}
 {% endif %}
+<script type="text/javascript" src="/static/jwplayer/jwplayer.js"></script>
 {% endblock %}
 {% block content %}
 <div id="main">
@@ -22,7 +23,12 @@
       {{ entry.date|datetz:"F jS, Y, H:i" }} &nbsp;/&nbsp; <a href="/{{entry.link|escape}}">{{entry.readtimes}} 次阅读</a> / <a href="/{{entry.link|escape}}#comments" title="查看 {{ entry.title}} 下的全部评论">{{entry.commentcount}} 条评论</a>{%if self.is_admin%} / <a href="{{entry.edit_url}}"  title="编辑文章" target="_blank">编辑</a>{%endif%}
       <br />分类：{%for cate in entry.categories%}&nbsp;<a href="/category/{{cate.slug}}" title="查看 {{cate.name}} 下的全部文章">{{cate.name}}</a>&nbsp;&nbsp;{%endfor%}标签：{% if entry.tags%}{%for tag in entry.tags%}&nbsp;<a href="/tag/{{tag|urlencode}}" title="查看 {{tag}} 标签的全部文章">{{tag}}</a>&nbsp;{%endfor%}{%endif%}
       </div>
-      <div class="entry"> {{ entry.content }} </div>
+      <div class="entry">
+          {%if entry.thumb_image_url %}
+              <img style="float: left; margin:10px 20px 0px 0px;" src="{{entry.thumb_image_url}}?size=128x96" alt="" />
+          {%endif%}
+          {{ entry.content }}
+      </div>
       {%if entry.miro_subscription_url %}
       <div id="play"><h4>播放列表只包含最新的5个节目（下载可获取全部）：</h4><br/></div>
       <div id="mediacontainer">Loading the player ...</div>
@@ -61,14 +67,22 @@
              <a href="{{ entry.sourcefeed }}" title="订阅RSS" target="_blank"><img src="/themes/{{ blog.theme_name }}/images/ico_rss.png" alt="RSS Subscribe" border="0" /></a>
             {%endif%}
            {%endif%}
-           <span class="share-tip">分享:&nbsp;&nbsp;</span>          
-           <script>weibo("{{ entry.fullurl|escape }}","{{ entry.title|escape }}")</script>
+           <span class="share-tip">          
+            <!-- JiaThis Button BEGIN -->
+            <div id="ckepop">
+                <a href="http://www.jiathis.com/share/?uid=1517804" class="jiathis jiathis_txt" target="_blank">
+                    <img src="http://v2.jiathis.com/code_mini/images/jiathis2.gif" border="0" />
+                </a>
+            </div>
+            <script type="text/javascript">var jiathis_config = {data_track_clickback:true};</script>            
+            <!-- JiaThis Button END -->
+           </span>
           </div>
       </div>
     </div>
     <!-- Related Posts-->    
     {% if relateposts %}
-	<h2><strong>crowdwisdom 猜你还喜欢</strong></h2>
+	<h2><strong>你可能还喜欢:</strong></h2>
 	<ul class="relatedPosts">
 	{%for post in relateposts%}
 		<li><a href="/{{post.link|escape}}">{{post.title|escape}}</a></li>
@@ -85,4 +99,6 @@
     </div>
   {% include "sidebar.html" %}
   </div>
+  <!-- JiaThis Javascript -->
+  <script type="text/javascript" src="http://v2.jiathis.com/code_mini/jia.js?uid=1517804" charset="utf-8"></script>
 {% endblock %}

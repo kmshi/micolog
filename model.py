@@ -427,6 +427,7 @@ class Entry(BaseModel):
 
 	#associated podcast/videocast/blogcast
 	sourcefeed=db.StringProperty(multiline=False,default='')
+	thumb_image_url=db.StringProperty(multiline=False,default='')
 	#thumbimage=db.BlobProperty()
 	#enclosures=db.TextProperty(default='')
 
