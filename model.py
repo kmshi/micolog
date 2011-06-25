@@ -507,7 +507,9 @@ class Entry(BaseModel):
 
 
 	@property
-	def fullurl(self):
+	def fullurl(self):                
+                if self.sourcefeed.startswith('https://'):
+                        return g_blog.baseurl.replace('http://','https://')+'/'+self.link;
 		return g_blog.baseurl+'/'+self.link;
 
 	@property
