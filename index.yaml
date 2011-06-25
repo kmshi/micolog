@@ -131,6 +131,14 @@ indexes:
 
 - kind: Entry
   properties:
+  - name: entrytype
+  - name: published
+  - name: tags
+  - name: post_id
+    direction: desc
+
+- kind: Entry
+  properties:
   - name: published
   - name: date
     direction: desc
