@@ -204,6 +204,17 @@ class SinglePost(BasePublicPage):
 		if g_blog.allow_pingback :
 			self.response.headers['X-Pingback']="%s/rpc"%str(g_blog.baseurl)
 
+	def put(self,slug=None,postid=None):
+		if postid:
+			entries = Entry.all().filter("published =", True).filter('post_id =', postid).fetch(1)
+		else:
+			slug=urldecode(slug)
+			entries = Entry.all().filter("published =", True).filter('link =', slug).fetch(1)
+
+		if entries and len(entries) == 1:
+                    entries[0].subscribetimes += 1
+                    entries[0].put()
+
 	@cache()
 	def get(self,slug=None,postid=None):
 		if postid:

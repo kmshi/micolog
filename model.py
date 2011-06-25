@@ -428,17 +428,17 @@ class Entry(BaseModel):
 	#associated podcast/videocast/blogcast
 	sourcefeed=db.StringProperty(multiline=False,default='')
 	thumb_image_url=db.StringProperty(multiline=False,default='')
-	#thumbimage=db.BlobProperty()
+	subscribetimes = db.IntegerProperty(default=0)
 	#enclosures=db.TextProperty(default='')
 
 	@property
 	def miro_subscription_url(self):
                 miro_base_url = 'http://etvblog.co.cc/p/get?'
                 if 'videocast' in [cat.slug for cat in self.categories] and self.sourcefeed:
-                        params={'type':'video','url1':self.sourcefeed}
+                        params={'section1':'video','url1':self.sourcefeed,'trackback1':self.fullurl()}
                         return miro_base_url + urllib.urlencode(params)
                 if 'audiocast' in [cat.slug for cat in self.categories] and self.sourcefeed:
-                        params={'type':'audio','url1':self.sourcefeed}
+                        params={'section1':'audio','url1':self.sourcefeed,'trackback1':self.fullurl()}
                         return miro_base_url + urllib.urlencode(params)
                 return None
 
@@ -450,6 +450,10 @@ class Entry(BaseModel):
                         return 'sound'
                 if 'blogcast'  in [cat.slug for cat in self.categories] and self.sourcefeed:
                         return 'blog'
+                if 'bookcast'  in [cat.slug for cat in self.categories] and self.sourcefeed:
+                        return 'book'
+                if 'appcast'   in [cat.slug for cat in self.categories] and self.sourcefeed:
+                        return 'app'
                 return None
         
 
