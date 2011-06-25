@@ -2,12 +2,12 @@
 {% block title %} {{tag}} - {{blog.title|escape}} {% endblock %}
 {% block head_block %}
 <meta name="Keywords" content="{{tag}}" />
-<meta name="Description" content="包含标签{{tag}}的文章" />
+<meta name="Description" content="包含标签{{tag}}的频道" />
 {% endblock %}
 {% block content %}
 <div id="main">
   <div id="content">
-    <div class="content-header"> &laquo; 包含标签 <strong>{{tag}}</strong> 的文章 </div>
+    <div class="content-header"> &laquo; 包含标签 <strong>{{tag}}</strong> 的频道 </div>
     {% for entry in entries %}
     <div id="post-{{entry.key}}" class="post">
       <h2 class="post-title"><a href="/{{ entry.link|escape }}" title="{{ entry.title|escape }}">{{ entry.title|escape }}</a></h2>
@@ -15,8 +15,8 @@
         {%if entry.get_sourcefeed_type%}
           <img src="/themes/{{ blog.theme_name }}/images/{{ entry.get_sourcefeed_type }}.png" border="0" />
         {%endif%}
-        {{ entry.date|datetz:"F jS, Y, H:i" }} &nbsp;&nbsp; / <a href="/{{entry.link|escape}}">{{entry.readtimes}} 次阅读</a> / <a href="/{{entry.link|escape}}#comments" title="查看 {{ entry.title}} 下的全部评论">{{entry.commentcount}} 条评论</a>{%if self.is_admin%} / <a class="post-edit-link" href="{{entry.edit_url}}"  title="编辑文章" target="_blank">编辑</a>{%endif%}
-        <br />分类：{%for cate in entry.categories%}&nbsp;<a href="/category/{{cate.slug}}" title="查看 {{cate.name}} 下的全部文章">{{cate.name}}</a>&nbsp;&nbsp;{%endfor%}标签：{% if entry.tags%}{%for tag in entry.tags%}&nbsp;<a href="/tag/{{tag|urlencode}}" title="查看 {{tag}} 标签的全部文章">{{tag}}</a>&nbsp;{%endfor%}{%endif%}
+        {{ entry.date|datetz:"F jS, Y, H:i" }} &nbsp;/&nbsp; <a href="{{ entry.miro_subscription_url }}" target="_blank">{{entry.subscribetimes}} 次订阅下载</a> / <a href="{{entry.fullurl|escape}}">{{entry.readtimes}} 次在线播放</a>  / <a href="/{{entry.link|escape}}#comments" title="查看 {{ entry.title}} 下的全部评论">{{entry.commentcount}} 条评论</a>{%if self.is_admin%} / <a class="post-edit-link" href="{{entry.edit_url}}"  title="编辑文章" target="_blank">编辑</a>{%endif%}
+        <br />分类：{%for cate in entry.categories%}&nbsp;<a href="/category/{{cate.slug}}" title="查看 {{cate.name}} 下的全部频道">{{cate.name}}</a>&nbsp;&nbsp;{%endfor%}标签：{% if entry.tags%}{%for tag in entry.tags%}&nbsp;<a href="/tag/{{tag|urlencode}}" title="查看 {{tag}} 标签的全部频道">{{tag}}</a>&nbsp;{%endfor%}{%endif%}
       </div>
     </div>
     {% endfor %}
