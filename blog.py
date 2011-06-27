@@ -208,7 +208,7 @@ class entriesByHotType(BasePublicPage):
 		import urllib
 		hottype=urldecode(hottype)
 
-		entries=Entry.all().filter("published =", True).order("-"+hottype)
+		entries=Entry.all().filter("published =", True).filter('entrytype =','post').order("-"+hottype)
 		entries,links=Pager(query=entries,items_per_page=20).fetch(page_index)
 		self.render('hot',{'entries':entries,'hottype':hottype,'pager':links})
 
