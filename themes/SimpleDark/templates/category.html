@@ -10,14 +10,42 @@
     <div class="content-header"> &laquo; 分类 <strong>{{category.name}}</strong> 下的频道 </div>
     {% for entry in entries %}
     <div id="post-{{entry.key}}" class="post">
-      <h2 class="post-title"><a href="/{{ entry.link|escape }}" title="{{ entry.title|escape }}">{{ entry.title|escape }}</a></h2>
+      <h2 class="post-title"><a href="{{ entry.fullurl|escape }}" title="{{ entry.title|escape }}">{{ entry.title|escape }}</a></h2>
       <div class="post-meta">
         {%if entry.get_sourcefeed_type%}
           <img src="/themes/{{ blog.theme_name }}/images/{{ entry.get_sourcefeed_type }}.png" border="0" />
         {%endif%}
-        {{ entry.date|datetz:"F jS, Y, H:i" }} &nbsp;/&nbsp; <a href="{{ entry.miro_subscription_url }}" target="_blank">{{entry.subscribetimes}} 次订阅下载</a> / <a href="{{entry.fullurl|escape}}">{{entry.readtimes}} 次在线播放</a>  / <a href="/{{entry.link|escape}}#comments" title="查看 {{ entry.title}} 下的全部评论">{{entry.commentcount}} 条评论</a>{%if self.is_admin%} / <a class="post-edit-link" href="{{entry.edit_url}}"  title="编辑文章" target="_blank">编辑</a>{%endif%}
+        {{ entry.date|datetz:"F jS, Y, H:i" }} &nbsp;/&nbsp; <a href="{{ entry.miro_subscription_url }}" target="_blank">{{entry.subscribetimes}} 次订阅下载</a> / <a href="{{entry.fullurl|escape}}">{{entry.readtimes}} 次在线播放</a>  / <a href="{{entry.fullurl|escape}}#comments" title="查看 {{ entry.title}} 下的全部评论">{{entry.commentcount}} 条评论</a>{%if self.is_admin%} / <a class="post-edit-link" href="{{entry.edit_url}}"  title="编辑文章" target="_blank">编辑</a>{%endif%}
         <br />分类：{%for cate in entry.categories%}&nbsp;<a href="/category/{{cate.slug}}" title="查看 {{cate.name}} 下的全部频道">{{cate.name}}</a>&nbsp;&nbsp;{%endfor%}标签：{% if entry.tags%}{%for tag in entry.tags%}&nbsp;<a href="/tag/{{tag|urlencode}}" title="查看 {{tag}} 标签的全部频道">{{tag}}</a>&nbsp;{%endfor%}{%endif%}
       </div>
+      <div class="entry">
+          {%if entry.thumb_image_url %}
+              <a href="{{ entry.fullurl|escape }}#play" title="在线播放">
+              <img style="float: left; margin:10px 20px 0px 0px;" src="{{entry.thumb_image_url}}?size=128x96" alt="" />
+              </a>
+          {%endif%}
+          {{entry|excerpt_more:"<strong>&raquo;阅读全文</strong>"}}
+      </div>
+      <div class="post-info share">
+          {%if entry.miro_subscription_url %}
+            <div class="share-item-title">
+              <span class="share-tip">订阅下载:&nbsp;</span> 
+              <a href="{{ entry.miro_subscription_url }}" title="用Miro-CrowdWisdom下载播放" target="_blank"><img src="/themes/{{ blog.theme_name }}/images/patrace1.png" alt="Download" border="0" /></a>
+            </div>
+          {%endif%}
+          
+          <div class="share-item">          
+           {%if entry.sourcefeed%}
+            {%if entry.miro_subscription_url %}
+             <span class="share-tip">在线播放:&nbsp;</span>
+             <a href="{{ entry.fullurl|escape }}#play" title="在线播放"><img src="/themes/{{ blog.theme_name }}/images/play.png" alt="Play" border="0" /></a>
+            {%else%}
+             <span class="share-tip">订阅:&nbsp;</span>
+             <a href="{{ entry.sourcefeed }}" title="订阅RSS" target="_blank"><img src="/themes/{{ blog.theme_name }}/images/ico_rss.png" alt="RSS Subscribe" border="0" /></a>
+            {%endif%}
+           {%endif%}
+          </div>
+      </div>      
     </div>
     {% endfor %}
     <div class="pagenavi"> <span class="previous-page"> {% if pager.prev %}&laquo;&nbsp;<a href="?page={{ pager.prev}}">上一页</a>{% endif %} </span> <span class="next-page"> {% if pager.next %}<a href="?page={{ pager.next }}">下一页</a>&nbsp;&raquo;{% endif %} </span> </div>

@@ -197,6 +197,21 @@ class entriesByTag(BasePublicPage):
 		entries,links=Pager(query=entries,items_per_page=20).fetch(page_index)
 		self.render('tag',{'entries':entries,'tag':slug,'pager':links})
 
+class entriesByHotType(BasePublicPage):
+	@cache()
+	def get(self,hottype):
+		
+		try:
+			page_index=int (self.param('page'))
+		except:
+			page_index=1
+		import urllib
+		hottype=urldecode(hottype)
+
+		entries=Entry.all().filter("published =", True).order("-"+hottype)
+		entries,links=Pager(query=entries,items_per_page=20).fetch(page_index)
+		self.render('hot',{'entries':entries,'hottype':hottype,'pager':links})
+
 
 
 class SinglePost(BasePublicPage):
@@ -736,6 +751,7 @@ def main():
 			('/category/(.*)',entriesByCategory),
 			('/(\d{4})/(\d{2})',archive_by_month),
 			('/tag/(.*)',entriesByTag),
+                        ('/hot/(?P<hottype>readtimes|subscribetimes)',entriesByHotType),
 			#('/\?p=(?P<postid>\d+)',SinglePost),
 			('/', MainPage),
 			('/do/(\w+)', do_action),

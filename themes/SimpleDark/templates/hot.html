@@ -1,13 +1,13 @@
 ﻿{% extends "base.html" %}
 {% block title %} {{tag}} - {{blog.title|escape}} {% endblock %}
 {% block head_block %}
-<meta name="Keywords" content="{{tag}}" />
-<meta name="Description" content="包含标签{{tag}}的频道" />
+<meta name="Keywords" content="{{hottype}}" />
+<meta name="Description" content="最热的频道,订阅下载最多的频道" />
 {% endblock %}
 {% block content %}
 <div id="main">
   <div id="content">
-    <div class="content-header"> &laquo; 包含标签 <strong>{{tag}}</strong> 的频道 </div>
+    <div class="content-header"> &laquo; {%ifequal hottype 'readtimes'%}最热的频道{%else%}订阅下载最多的频道{%endifequal%}</div>
     {% for entry in entries %}
     <div id="post-{{entry.key}}" class="post">
       <h2 class="post-title"><a href="{{ entry.fullurl|escape }}" title="{{ entry.title|escape }}">{{ entry.title|escape }}</a></h2>
