@@ -133,6 +133,13 @@ indexes:
   properties:
   - name: entrytype
   - name: published
+  - name: subscribetimes
+    direction: desc
+
+- kind: Entry
+  properties:
+  - name: entrytype
+  - name: published
   - name: tags
   - name: post_id
     direction: desc
