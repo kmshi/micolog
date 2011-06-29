@@ -1,6 +1,10 @@
 ﻿{% extends "base.html" %}
 {% block head_block %}
 <meta name="Description" content="{{ blog.subtitle|escape}}" />
+<script type="text/javascript" src="/static/swfobject2/swfobject.js"></script>
+<script type="text/javascript">
+	swfobject.embedSWF("/static/swfobject2/test.swf", "check_flashplayer", "0", "0", "10.0.0", "/static/swfobject2/expressInstall.swf");
+</script>
 {% endblock %}
 {% block content %}
 <div id="main">
@@ -9,6 +13,10 @@
 	<blockquote>
            {{ blog.blognotice}}
         </blockquote>
+        <div id="check_flashplayer">
+		<h1>The flash player plugin in this browser is not correctly installed</h1>
+		<p><a href="http://www.adobe.com/go/getflashplayer"><img src="http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif" alt="Get Adobe Flash player" /></a></p>
+	</div>
     </div> 
     {% for entry in entries %}
     <div id="post-{{entry.key}}" class="post">
