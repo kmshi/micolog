@@ -1,9 +1,4 @@
 /* CSS Hacks for Internet Explorer (IE8 and below) */
-
-img {
-    behavior: url(/static/iepngfix/iepngfix.htc);
-}
-
 img {
 	-ms-interpolation-mode:bicubic;
 }
