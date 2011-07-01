@@ -10,6 +10,7 @@ from google.appengine.api import datastore
 from datetime import datetime
 import urllib, hashlib,urlparse
 import zipfile,re,pickle,uuid
+import cgi
 #from base import *
 logging.info('module base reloaded')
 
@@ -435,11 +436,11 @@ class Entry(BaseModel):
 	def miro_subscription_url(self):
                 miro_base_url = 'http://crowdwisdom.co.cc/p/get?'
                 if 'videocast' in [cat.slug for cat in self.categories] and self.sourcefeed:
-                        params={'section1':'video','url1':self.sourcefeed,'trackback1':self.fullurl}
-                        return miro_base_url + urllib.urlencode(params)
+                        params={'type':'video','url1':self.sourcefeed,'trackback1':self.fullurl,'title':self.title}
+                        return cgi.escape(miro_base_url + urllib.urlencode(params))
                 if 'audiocast' in [cat.slug for cat in self.categories] and self.sourcefeed:
-                        params={'section1':'audio','url1':self.sourcefeed,'trackback1':self.fullurl}
-                        return miro_base_url + urllib.urlencode(params)
+                        params={'type':'audio','url1':self.sourcefeed,'trackback1':self.fullurl,'title':self.title}
+                        return cgi.escape(miro_base_url + urllib.urlencode(params))
                 return None
 
 	@property
