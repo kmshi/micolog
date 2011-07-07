@@ -86,8 +86,8 @@ body {
 }
 
 	#blog-name {
-		padding:8px 24px;
-		background:url(/static/images/mlog.png) no-repeat 0px 36px;
+		padding:8px 34px;
+		background:url(/static/images/mlog.png) no-repeat 10px 36px;
 	}
 
 	#blog-name a {
