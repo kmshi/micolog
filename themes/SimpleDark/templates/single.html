@@ -7,9 +7,32 @@
 {%endif%}
 {%if entry.excerpt%}
 <meta name="Description" content="{{entry.excerpt|escape}}">
+{%else%}
+<meta name="Description" content="{{entry.content|escape}}">
 {%endif%}
 {% endif %}
 <script type="text/javascript" src="/static/jwplayer/jwplayer.js"></script>
+<script type="text/javascript" charset="utf-8">
+ function weibo(){
+  var _w = 90 , _h = 24;
+  var param = {
+    url:location.href,
+    type:'2',
+    count:'1', /**是否显示分享数，1显示(可选)*/
+    appkey:'', /**您申请的应用appkey,显示分享来源(可选)*/
+    title:'{{ blog.subtitle|escape}} : {{blog.title|escape}}', /**分享的文字内容(可选，默认为所在页面的title)*/
+    pic:location.protocol+'//'+location.hostname + '{{entry.thumb_image_url}}', /**分享图片的路径(可选)*/
+    ralateUid:'', /**关联用户的UID，分享微博会@该用户(可选)*/
+    rnd:new Date().valueOf()
+  }
+  var temp = [];
+  for( var p in param ){
+    temp.push(p + '=' + encodeURIComponent( param[p] || '' ) )
+  }
+  document.write('<iframe allowTransparency="true" frameborder="0" scrolling="no" src="http://hits.sinajs.cn/A1/weiboshare.html?' + temp.join('&') + '" width="'+ _w+'" height="'+_h+'"></iframe>');
+  document.write('<iframe scrolling="no" frameborder="0" allowtransparency="true" src="http://www.connect.renren.com/like?url='+ encodeURIComponent(location.href) + '&showfaces=false" style="width: 160px;height: 24px;"></iframe>');
+}
+</script>
 {% endblock %}
 {% block content %}
 <div id="main">
@@ -67,14 +90,17 @@
              <a href="{{ entry.sourcefeed }}" title="订阅RSS" target="_blank"><img src="/themes/{{ blog.theme_name }}/images/ico_rss.png" alt="RSS Subscribe" border="0" /></a>
             {%endif%}
            {%endif%}
-           <span class="share-tip">          
+           <span class="share-tip">
+            <script>weibo()</script>
             <!-- JiaThis Button BEGIN -->
+            <!--
             <div id="ckepop">
                 <a href="http://www.jiathis.com/share/?uid=1517804" class="jiathis jiathis_txt" target="_blank">
                     <img src="http://v2.jiathis.com/code_mini/images/jiathis2.gif" border="0" />
                 </a>
             </div>
-            <script type="text/javascript">var jiathis_config = {data_track_clickback:true};</script>            
+            <script type="text/javascript">var jiathis_config = {data_track_clickback:true};</script>
+            -->
             <!-- JiaThis Button END -->
            </span>
           </div>
@@ -99,6 +125,7 @@
     </div>
   {% include "sidebar.html" %}
   </div>
-  <!-- JiaThis Javascript -->
+  <!-- JiaThis Javascript 
   <script type="text/javascript" src="http://v2.jiathis.com/code_mini/jia.js?uid=1517804" charset="utf-8"></script>
+  -->
 {% endblock %}
