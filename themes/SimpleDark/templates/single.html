@@ -70,6 +70,10 @@
             provider:'{{ entry.get_sourcefeed_type }}', /**video,sound,image,youtube,http,rtmp**/
             height: 300,
             width: 620 });
+        
+        jwplayer("mediacontainer").onError(function(event) {
+            jwplayer().load(feedurl.replace(location.hostname+"/pn/",location.hostname+"/p/"));
+            jwplayer().play();});
       </script>
       {%endif%}
     
