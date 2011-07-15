@@ -434,8 +434,8 @@ class Entry(BaseModel):
 
 	@property
 	def miro_subscription_url(self):
-                #miro_base_url = 'http://subscribe.idearadar.org/p/get?'
-                miro_base_url = 'http://crowdwisdom.co.cc/p/get?'
+                miro_base_url = 'https://subscribe.idearadar.org/p/get?'
+                #miro_base_url = 'http://crowdwisdom.co.cc/p/get?'
                 if 'videocast' in [cat.slug for cat in self.categories] and self.sourcefeed:
                         params={'type':'video','url1':self.sourcefeed,'trackback1':self.fullurl}
                         return cgi.escape(miro_base_url + urllib.urlencode(params))
@@ -510,8 +510,8 @@ class Entry(BaseModel):
 
 	@property
 	def fullurl(self):                
-                if self.sourcefeed.startswith('https://'):
-                        return g_blog.baseurl.replace('http://','https://')+'/'+self.link;
+                #if self.sourcefeed.startswith('https://'):
+                #        return g_blog.baseurl.replace('http://','https://')+'/'+self.link;
 		return g_blog.baseurl+'/'+self.link;
 
 	@property

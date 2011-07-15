@@ -16,7 +16,7 @@
  function weibo(){
   var _w = 90 , _h = 24;
   var param = {
-    url:location.href,
+    url:'https://www.idearadar.org/{{ entry.link|escape }}',
     type:'2',
     count:'1', /**是否显示分享数，1显示(可选)*/
     appkey:'', /**您申请的应用appkey,显示分享来源(可选)*/
@@ -74,7 +74,7 @@
           {%if entry.miro_subscription_url %}
             <div class="share-item-title">
               <span class="share-tip">订阅下载:&nbsp;</span> 
-              <a href="{{ entry.miro_subscription_url }}" title="用Miro-HaoTV下载播放" ><img src="/themes/{{ blog.theme_name }}/images/patrace1.png" alt="Download" border="0" /></a>
+              <a href="{{ entry.miro_subscription_url }}" title="用Miro-IdeaRadar下载播放" ><img src="/themes/{{ blog.theme_name }}/images/patrace1.png" alt="Download" border="0" /></a>
             </div>
           {%endif%}
           
