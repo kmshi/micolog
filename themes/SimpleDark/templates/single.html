@@ -53,7 +53,8 @@
           {{ entry.content }}
       </div>
       {%if entry.miro_subscription_url %}
-      <div><h4>播放列表只包含最新的5个节目（下载可获取全部）：</h4><br/></div>
+      <div><h4>播放列表只包含最新的5个节目（下载可获取全部）：</h4></div>
+      <div id="ifgfwtips"><p style="color:blue">看来被墙了，重新生成新的播放列表，这次应该可以了吧 ...</p></div>
       <div id="mediacontainer">Loading the first player ...</div>
       <div id="secondmediacontainer">Loading the second player ...</div>
       <script type="text/javascript">
@@ -86,6 +87,7 @@
             width: 620 });
 	}
 	
+	hide("ifgfwtips");
 	hide("mediacontainer");
 	hide("secondmediacontainer");
 	setup("mediacontainer");
@@ -93,6 +95,7 @@
             /**if (event.message.indexOf("2032") == -1)return;**/
 	    jwplayer("mediacontainer").remove();
 	    hide("mediacontainer");
+            show("ifgfwtips");
 
 	    setup("secondmediacontainer");
             jwplayer("secondmediacontainer").load(feedurl.replace(location.hostname+"/pn/",location.hostname+"/p/"));
