@@ -11,6 +11,10 @@
 <meta name="Description" content="{{entry.content|escape}}">
 {%endif%}
 {% endif %}
+<script type="text/javascript" src="/static/swfobject2/swfobject.js"></script>
+<script type="text/javascript">
+	swfobject.embedSWF("/static/swfobject2/test.swf", "check_flashplayer", "0", "0", "10.0.0", "/static/swfobject2/expressInstall.swf");
+</script>
 <script type="text/javascript" src="/static/jwplayer/jwplayer.js"></script>
 <script type="text/javascript" charset="utf-8">
  function weibo(){
@@ -54,9 +58,15 @@
       </div>
       {%if entry.miro_subscription_url %}
       <div><h4>播放列表只包含最新的5个节目（下载可获取全部）：</h4></div>
+      <div id="check_flashplayer">
+	  <h3 style="color:pink">本网站需要浏览器支持flash播放，请点击下面的Get Adobe Flash player按钮进行安装</h3>
+	  <p><a href="http://www.adobe.com/go/getflashplayer"><img src="http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif" alt="Get Adobe Flash player" /></a></p>
+      </div>
       <div id="ifgfwtips"><p style="color:pink">看来被墙了，重新生成新的播放列表，这次应该可以了吧 ...</p></div>
       <div id="mediacontainer">Loading the first player ...</div>
       <div id="secondmediacontainer">Loading the second player ...</div>
+
+
       <script type="text/javascript">
         feedurl = "{{ entry.sourcefeed|escape }}/5";
         if (location.hostname == "www.idearadar.org") {feedurl = feedurl.replace("50.18.123.69","www.idearadar.org")};
@@ -79,8 +89,12 @@
             /*playlistfile: feedurl,*/
             playlist: 'right',
             repeat: 'list',
+            {%ifequal entry.get_sourcefeed_type 'sound' %}
+            'plugins': {'revolt-1': {}},
+            {%else%}
             /**'plugins': 'ltas',**/
             /**'ltas.cc': 'svnoolcmzumvrgw',**/
+            {%endifequal%}            
             controlbar: 'bottom',
             provider:'{{ entry.get_sourcefeed_type }}', /**video,sound,image,youtube,http,rtmp**/
             height: 300,
