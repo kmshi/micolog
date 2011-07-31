@@ -3,12 +3,12 @@
 {% block head_block %}
 {% if entry %}
 {%if entry.strtags%}
-<meta name="Keywords" content="英文podcast,英语podcast,Internet TV,视听英语,{{entry.strtags|escape}}">
+<meta name="Keywords" content="英文podcast,英语podcast,Internet TV,英语听力,{{entry.strtags|escape}}">
 {%endif%}
 {%if entry.excerpt%}
-<meta name="Description" content="英文podcast,英语podcast,Internet TV,视听英语 -- {{entry.excerpt|escape}}">
+<meta name="Description" content="英文podcast,英语podcast,Internet TV,英语听力 -- {{entry.excerpt|escape}}">
 {%else%}
-<meta name="Description" content="英文podcast,英语podcast,Internet TV,视听英语 -- {{entry.content|escape}}">
+<meta name="Description" content="英文podcast,英语podcast,Internet TV,英语听力 -- {{entry.content|escape}}">
 {%endif%}
 {% endif %}
 <script type="text/javascript" src="/static/swfobject2/swfobject.js"></script>

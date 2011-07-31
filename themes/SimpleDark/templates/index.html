@@ -1,6 +1,7 @@
 ﻿{% extends "base.html" %}
 {% block head_block %}
-<meta name="Description" content="英文podcast,英语podcast,Internet TV,视听英语 -- {{ blog.subtitle|escape}}" />
+<meta name="Keywords" content="英文podcast,英语podcast,Internet TV,英语听力,{{entry.strtags|escape}}">
+<meta name="Description" content="英文podcast,英语podcast,Internet TV,英语听力 -- {{ blog.subtitle|escape}}" />
 <script type="text/javascript" src="/static/swfobject2/swfobject.js"></script>
 <script type="text/javascript">
 	swfobject.embedSWF("/static/swfobject2/test.swf", "check_flashplayer", "0", "0", "10.0.0", "/static/swfobject2/expressInstall.swf");
