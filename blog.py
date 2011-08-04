@@ -423,7 +423,7 @@ class SinglePost(BasePublicPage):
 			return "/"+url+"?mp="+str(pindex)+"#comments"
 
 class FeedHandler(BaseRequestHandler):
-	@cache(time=600)
+	@cache(time=36000)
 	def get(self,tags=None):
 		entries = Entry.all().filter('entrytype =','post').filter('published =',True).order('-date').fetch(10)
 		if entries and entries[0]:
@@ -435,7 +435,7 @@ class FeedHandler(BaseRequestHandler):
 		self.render2('views/rss.xml',{'entries':entries,'last_updated':last_updated})
 
 class CommentsFeedHandler(BaseRequestHandler):
-	@cache(time=600)
+	@cache(time=36000)
 	def get(self,tags=None):
 		comments = Comment.all().order('-date').filter('ctype =',0).fetch(10)
 		if comments and comments[0]:
@@ -677,7 +677,7 @@ class getMedia(webapp.RequestHandler):
 		media=Media.get(slug)
 		if media:
 			self.response.headers['Expires'] = 'Thu, 15 Apr 3010 20:00:00 GMT'
-			self.response.headers['Cache-Control'] = 'max-age=3600,public'
+			self.response.headers['Cache-Control'] = 'max-age=36000,public'
 			self.response.headers['Content-Type'] = str(media.mtype)
 			
 			a=self.request.get('a')

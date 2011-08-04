@@ -18,7 +18,7 @@ cwd = os.getcwd()
 theme_path = os.path.join(cwd, 'themes')
 file_modifieds={}
 
-max_age = 600  #expires in 10 minutes
+max_age = 600*60  #expires in 10*60 minutes
 def Error404(handler):
 	handler.response.set_status(404)
 	html = template.render(os.path.join(cwd,'views/404.html'), {'error':404})
