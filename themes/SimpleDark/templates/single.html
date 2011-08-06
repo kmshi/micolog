@@ -142,16 +142,21 @@
             {%endif%}
            {%endif%}
            <span class="share-tip">
-            分享:&nbsp;&nbsp;<script>weibo()</script>
+            <!--分享:&nbsp;&nbsp;<script>weibo()</script>-->
             <!-- JiaThis Button BEGIN -->
-            <!--
-            <div id="ckepop">
-                <a href="http://www.jiathis.com/share/?uid=1517804" class="jiathis jiathis_txt" target="_blank">
-                    <img src="http://v2.jiathis.com/code_mini/images/jiathis2.gif" border="0" />
-                </a>
+            <div id="ckepop" style="margin-top:6px">
+              <span class="jiathis_txt">分享到：</span>
+              <a class="jiathis_button_tsina"></a>
+              <a class="jiathis_button_douban"></a>
+              <a class="jiathis_button_tieba"></a>
+              <a class="jiathis_button_qzone"></a>
+              <a class="jiathis_button_tqq"></a>
+              <a class="jiathis_button_t163"></a>
+              <a class="jiathis_button_renren"></a>              
+              <a href="http://www.jiathis.com/share?uid=1517804" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+              <a class="jiathis_counter_style"></a>
             </div>
             <script type="text/javascript">var jiathis_config = {data_track_clickback:true};</script>
-            -->
             <!-- JiaThis Button END -->
            </span>
           </div>
@@ -176,7 +181,7 @@
     </div>
   {% include "sidebar.html" %}
   </div>
-  <!-- JiaThis Javascript 
+  <!-- JiaThis Javascript -->
   <script type="text/javascript" src="http://v2.jiathis.com/code_mini/jia.js?uid=1517804" charset="utf-8"></script>
-  -->
+
 {% endblock %}
