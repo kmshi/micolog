@@ -162,7 +162,8 @@
           </div>
       </div>
     </div>
-    <!-- Related Posts-->    
+    <!-- Related Posts-->
+    <!--
     {% if relateposts %}
 	<h2><strong>你可能还喜欢:</strong></h2>
 	<ul class="relatedPosts">
@@ -171,6 +172,17 @@
 	{%endfor%}
 	</ul>
     {% endif %}
+    -->
+    <div class="wumii-hook">
+        <input type="hidden" name="wurl" value="{{blog.baseurl}}/{{ entry.link }}" />
+        <input type="hidden" name="wtitle" value="{{entry.title}}" />
+    </div>
+    <p style="display: none;">
+        {%for tag in entry.tags%}<a rel="tag">{{tag}}</a>{%endfor%}
+    </p>
+    <script>
+        var wumiiSitePrefix = "{{blog.baseurl}}";
+    </script>
     <!-- end Related Posts-->
     
     <div class="pagenavi"> {%for prev in entry.prev%} <span class="previous-page">&laquo;&nbsp;<a href="/{{prev.link}}">{{prev.title}}</a></span> {%endfor%}
@@ -183,5 +195,12 @@
   </div>
   <!-- JiaThis Javascript -->
   <script type="text/javascript" src="http://v2.jiathis.com/code_mini/jia.js?uid=1517804" charset="utf-8"></script>
-
+  <!-- wumii Script-->
+  {% if entry %}
+    <script type="text/javascript">
+      var wumiiParams = "&num=5&mode=2&pf=Micolog";
+    </script>
+    <script type="text/javascript" id="wumiiRelatedItems" src="http://widget.wumii.com/ext/relatedItemsWidget.htm"></script>
+  {%endif%}
+  
 {% endblock %}
