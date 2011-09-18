@@ -92,6 +92,13 @@ class BasePublicPage(BaseRequestHandler):
 			.filter('sticky =',True)\
 			.order('-date')
 
+
+class CoverPage(BasePublicPage):
+	@cache(time=36000)
+	def get(self):
+            self.render('cover',{'ishome':True})
+            
+
 class MainPage(BasePublicPage):
 	def get(self,page=1):
 		postid=self.param('p')
@@ -136,7 +143,7 @@ class MainPage(BasePublicPage):
 						   'show_prev' : show_prev,
 						'show_next' : show_next,
 						'pageindex':page,
-						'ishome':True,
+						'ishome':False,
 						'pagecount':max_page,
 						'postscounts':entrycount
 							})
@@ -753,7 +760,8 @@ def main():
 			('/tag/(.*)',entriesByTag),
                         ('/hot/(?P<hottype>readtimes|subscribetimes)',entriesByHotType),
 			#('/\?p=(?P<postid>\d+)',SinglePost),
-			('/', MainPage),
+			#('/', MainPage),
+			('/', CoverPage),
 			('/do/(\w+)', do_action),
 			('/e/(.*)',Other),
 			('/([\\w\\-\\./%]+)', SinglePost),
