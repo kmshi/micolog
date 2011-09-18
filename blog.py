@@ -233,9 +233,9 @@ class SinglePost(BasePublicPage):
 			slug=urldecode(slug)
 			entries = Entry.all().filter("published =", True).filter('link =', slug).fetch(1)
 
-		if entries and len(entries) == 1:
-                    entries[0].subscribetimes += 1
-                    entries[0].put()
+		#if entries and len(entries) == 1:
+                #    entries[0].subscribetimes += 1
+                #    entries[0].put()
 
 	@cache()
 	def get(self,slug=None,postid=None):
@@ -254,8 +254,8 @@ class SinglePost(BasePublicPage):
 			return self.redirect(entry.external_page_address,True)
 		if g_blog.allow_pingback and entry.allow_trackback:
 			self.response.headers['X-Pingback']="%s/rpc"%str(g_blog.baseurl)
-		entry.readtimes += 1
-		entry.put()
+		#entry.readtimes += 1
+		#entry.put()
 		self.entry=entry
 
 

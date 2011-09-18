@@ -114,36 +114,37 @@ padding: 5px 10px;
 <div class="content_fix">
         <p>多多试听如下推荐的podcasts，那些你能听懂百分七十到八十的就是适合你的可理解性i+1的听力输入podcasts.</p>
         <br/><h2>■ 慢速目录┃适合英语听力基础薄弱，词汇量较小的英语学习者</h2>
-        <p>• <a href="https://www.idearadar.org/2011/06/26/esl_podcast.html" target="_self">English as a Second Language Podcast(ESLPod)</a></p>
-        <p>• <a href="https://www.idearadar.org/2011/06/27/voa_special_english_tv.html" target="_self">VOA: Special English TV</a></p>
-        <p>• <a href="https://www.idearadar.org/2011/08/13/esl_previous_episodes.html" target="_self">English as a Second Language Podcast(Previous Episodes)</a></p>
-        <p>• <a href="https://www.idearadar.org/2011/07/31/learning_english_for_china.html" target="_self">BBC: Learning English for China</a></p>
+        <p>• <a href="/2011/06/26/esl_podcast.html" target="_self">English as a Second Language Podcast(ESLPod)</a></p>
+        <p>• <a href="/2011/06/27/voa_special_english_tv.html" target="_self">VOA: Special English TV</a></p>
+        <p>• <a href="/2011/08/13/esl_previous_episodes.html" target="_self">English as a Second Language Podcast(Previous Episodes)</a></p>
+        <p>• <a href="/2011/07/31/learning_english_for_china.html" target="_self">BBC: Learning English for China</a></p>
         <br/><h2>■ 较慢速目录┃适合有一定听力基础和词汇量的英语学习者</h2>
-        <p>• <a href="https://www.idearadar.org/2011/06/27/ted_talks.html" target="_self">TED Talks -- Ideas worth spreading</a></p>
-        <p>• <a href="https://www.idearadar.org/2011/07/17/talk_about_english_from_bbc.html" target="_self">BBC: The English We Speak</a></p>
-        <p>• <a href="https://www.idearadar.org/2011/08/13/student_news_from_cnn.html" target="_self">CNN Student News TV</a></p>
-        <p>• <a href="https://www.idearadar.org/2011/07/17/6_minute_english_from_bbc.html" target="_self">BBC-6 Minute English</a></p>
+        <p>• <a href="/2011/06/27/ted_talks.html" target="_self">TED Talks -- Ideas worth spreading</a></p>
+        <p>• <a href="/2011/07/17/talk_about_english_from_bbc.html" target="_self">BBC: The English We Speak</a></p>
+        <p>• <a href="/2011/08/13/student_news_from_cnn.html" target="_self">CNN Student News TV</a></p>
+        <p>• <a href="/2011/07/17/6_minute_english_from_bbc.html" target="_self">BBC-6 Minute English</a></p>
         <br/><h2>■ 进阶提升目录┃适合有基础较好，需要提升词汇量的英语学习者</h2>
-        <p>• <a href="https://www.idearadar.org/2011/07/17/just_vocabulary.html" target="_self">Just Vocabulary</a></p>
-        <p>• <a href="https://www.idearadar.org/2011/08/13/very_vocabulary.html" target="_self">Very Vocabulary</a></p>
-        <p>• <a href="https://www.idearadar.org/2011/08/13/awesome_vocabulary.html" target="_self">Awesome Vocabulary</a></p>
-        <p>• <a href="https://www.idearadar.org/2011/08/13/fun_english_lessons.html" target="_self">Fun English Lessons</a></p>
-        <p>• <a href="https://www.idearadar.org/2011/08/13/listentoenglish_learnenglish.html" target="_self">Listen to English - learn English!</a></p>
+        <p>• <a href="/2011/07/17/just_vocabulary.html" target="_self">Just Vocabulary</a></p>
+        <p>• <a href="/2011/08/13/very_vocabulary.html" target="_self">Very Vocabulary</a></p>
+        <p>• <a href="/2011/08/13/awesome_vocabulary.html" target="_self">Awesome Vocabulary</a></p>
+        <p>• <a href="/2011/08/13/fun_english_lessons.html" target="_self">Fun English Lessons</a></p>
+        <p>• <a href="/2011/08/13/listentoenglish_learnenglish.html" target="_self">Listen to English - learn English!</a></p>
         <br/><h2>■ 语法练习目录┃适合听说读写流利，但语法稍有小毛病的英语学习者</h2>
-        <p>• <a href="https://www.idearadar.org/2011/07/17/grammar_girl.html" target="_self">Grammar Girl for Better Writing</a></p>
-        <p>• <a href="https://www.idearadar.org/2011/07/17/splendid_speaking.html" target="_self">Splendid Speaking(BrEn</a>)</p>
+        <p>• <a href="/2011/07/17/grammar_girl.html" target="_self">Grammar Girl for Better Writing</a></p>
+        <p>• <a href="/2011/07/17/splendid_speaking.html" target="_self">Splendid Speaking(BrEn</a>)</p>
         <br/><h2>■ 商务英语目录┃适合需要经常在办公场所使用英语交流的英语学习者</h2>
-        <p>• <a href="https://www.idearadar.org/2011/08/13/BusinessEnglishPod.html" target="_self">Business English Pod</a></p>
+        <p>• <a href="/2011/08/13/BusinessEnglishPod.html" target="_self">Business English Pod</a></p>
         <br/><h2>■ 资讯兴趣英语┃适合对最新资讯、科技、商业、思想感兴趣的英语爱好者</h2>
         <p>• 按分类分：{%for cate in categories%}
              {% if not cate.parent_cat %}
-                <a href="/category/{{cate.slug}}" title="查看 {{cate.name}} 下的全部频道">{{cate.name}}</a>({{cate.count}})
+                <a href="/category/{{cate.slug}}" title="查看 {{cate.name}} 下的全部频道">{{cate.name}}</a>({{cate.count}})&nbsp;
              {%endif%}    
            {%endfor%}
         </p>
+        <br/>
         <p>• 按标签分：{% if alltags %}
             {% for t in alltags %}
-                <a title="查看{{ t.tag }}下的全部频道" href="/tag/{{t.tag|urlencode}}">{{t.tag}}</a>({{t.tagcount}})
+                <a title="查看{{ t.tag }}下的全部频道" href="/tag/{{t.tag|urlencode}}">{{t.tag}}</a>({{t.tagcount}})&nbsp;
             {%endfor%}
            {% endif %}
         </p>
